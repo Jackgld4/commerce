@@ -1,0 +1,35 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h1>Category</h1>
+    <form method="GET" action="{% url 'Categories' %}">
+        <div class="form-group">
+            <label for="category">Choose a Category:</label>
+            <select name="category" id="category" onchange="this.form.submit()">
+                <option value="">All categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.CategoryName }}" {% if category.CategoryName == selectedCategory %}selected{% endif %}>
+                        {{ category.CategoryName }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
+    <div class="listings-container">
+        {% if listings %}
+            {% for listing in listings %}
+                <div class="listing-box">
+                    <h3>{{ listing.title }}</h3>
+                    <img src="{{ listing.imageUrl }}" alt="Image of {{ listing.title }}" style="max-width: 25%; max-height: 25%;">
+                    <p>{{ listing.description }}</p>
+                    <p>Price: ${{ listing.price }}</p>
+                    <a href="{% url 'listing' title=listing.title %}" class="btn btn-success"> Go to Listing </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No listings found for this category.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<h1> Listing: {{ listing.title }} </h1>
+
+
+
+    <img src="{{ listing.imageUrl }}" 
+    alt="Image of {{ listing.title }}"
+        style="max-width: 25%; max-height: 25%;">
+    <br>
+    <p>{{ listing.description }}</p>
+    <br>
+
+    <h3> Price: ${{ listing.price }}</h3>
+
+
+<div class="details"> 
+<h4> Details: </h4> 
+<ul stule ="list-style-typpe:disc; padding-left: 20px;"> 
+    <li>Listed by: {{ listing.owner }}</li>
+    <li>Category: 
+        {% if listing.category == "NA" %}
+            No listing for this category
+        {% else %}
+            {{ listing.category }}
+        {% endif %}
+    </li>
+</ul>
+</div>
+{% endblock %}

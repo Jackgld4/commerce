@@ -1,0 +1,14 @@
+body {
+    padding: 10px;
+}
+
+
+.listing-box {
+    border: 1px solid #ccc; /* Border around the box */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px; /* Inner spacing */
+    margin: 10px; /* Spacing between boxes */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #ffffff; /* Background color */
+    }
+

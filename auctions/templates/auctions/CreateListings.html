@@ -1,0 +1,46 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{{ entry| safe }}
+    <h2>Create New Listing</h2>
+
+    <form action="{% url 'CreateListings' %}" method="POST"> 
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="title"> Title of Listing: </label>
+            <input type="text" id="title" name="title" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="imageUrl"> Image URL </label>
+            <input type="text" id="imageUrl" name="imageUrl" placeholder="Paste Image URL">
+        </div>
+        <div class="form-group">
+            <label for="description"> Description of item:</label>
+            <br>
+            <textarea id="description" name="description" rows="10" cols="50" placeholder="Description (500 characters)"> {{description}} </textarea>
+        </div>
+        <div class="form-group">
+            <label for="price"> Price of item </label>
+            <input type="text" id="price" name="price" placeholder="Price">
+        </div>
+ <!--        <div class="form-group">
+            <label for="owner"> Owner </label>
+            <input type="text" name="owner" id="owner" placeholder="Owner">
+    </div>
+               <div class="form-group">
+                <label for="active"> Listing is Active:</label>
+                <input type="checkbox" id="active" name="active" value="True">Blue box means listing is active
+        </div> -->
+        <div class="form-group">
+            <label for="category"> Choose a Category: </label>
+            <select name="category" id="category">
+                {% for category in categories %}
+                    <option value = "{{ category.CategoryName }}">{{ category.CategoryName }}</option>
+                {% endfor %}
+            </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success"> Post Listing </button>
+    </form>
+{% endblock %}
+
