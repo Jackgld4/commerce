@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <h1>Watchlist</h1>
+        {% for listing in listing %}
+         <div class="listing-box">
+                <h2>{{ listing.title }}</h2>
+                <br>
+                <img src="{{ listing.imageUrl }}" 
+                     alt="Image of {{ listing.title }}"
+                     style="max-width: 25%; max-height: 25%;">
+                <br>
+                <p>{{ listing.description }}</p>
+                <br>
+                <p>Price: ${{ listing.price }}</p>
+                <a href="{% url 'listing' title=listing.title %}" class="btn btn-success"> Go to Listing </a> 
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
