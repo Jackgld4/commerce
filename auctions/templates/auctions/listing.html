@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<h1> Listing: {{ listing.title }} </h1>
+<h1>{{ listing.title }} </h1>
 
 
 
@@ -28,5 +28,20 @@
         {% endif %}
     </li>
 </ul>
+</div>
+<div>
+{% if user.is_authenticated %}
+    {% if listingInWatchList %}
+        <form action="{% url 'remove' title=listing.title %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove from Watchlist</button>
+        </form>
+    {% else %}
+        <form action="{% url 'add' title=listing.title %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Add to Watchlist</button>
+        </form>
+    {% endif %}
+{% endif %}
 </div>
 {% endblock %}

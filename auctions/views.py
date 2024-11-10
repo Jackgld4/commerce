@@ -15,9 +15,30 @@ def index(request):
 
 def listing(request, title): 
     listingID=Listings.objects.get(title=title)
+    listingInWatchlist= request.user in listingID.watchList.all()
     return render(request, "auctions/listing.html", {
-        "listing":listingID
+        "listing":listingID, 
+        "listingInWatchList": listingInWatchlist
         })
+
+def remove(request, title): 
+    listingID=Listings.objects.get(title=title)
+    user= request.user
+    listingID.watchList.remove(user)
+    return HttpResponseRedirect(reverse("listing", args=(title, )))
+
+def add(request, title): 
+    listingID=Listings.objects.get(title=title)
+    user= request.user
+    listingID.watchList.add(user)
+    return HttpResponseRedirect(reverse("listing", args=(title, )))
+
+def watchList(request):
+    user= request.user
+    listings= user.watchList.all()
+    return render(request, "auctions/watchlist.html", { 
+             "listing": listings
+            })
 
 def CreateListings(request):
     if request.method== "GET":

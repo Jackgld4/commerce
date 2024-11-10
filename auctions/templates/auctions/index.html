@@ -2,25 +2,6 @@
 {% load static %}
 
 {% block body %}
-<!-- <style>
-        .listing-box {
-            width: 100px; /* set your desired width */
-            height: 100px; /* set your desired height */
-            background-color: #f0f0f0; /* optional background color */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #ccc; /* optional border */
-            margin: 10px; /* optional spacing between boxes */
-            padding: 16px; /* optional inner spacing */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
-        }
-
-        .listing-box img {
-            max-width: 100%; /* responsive image width */
-            height: auto; /* maintain aspect ratio */
-        }
-    </style>-->    
 
     <h1>Active Listings</h1>
         {% for listing in activeListings %}
