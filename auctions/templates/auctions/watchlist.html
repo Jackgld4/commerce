@@ -3,7 +3,8 @@
 
 {% block body %}
 
-    <h1>Watchlist</h1>
+<h1>Watchlist</h1>
+    {% if listing %}
         {% for listing in listing %}
          <div class="listing-box">
                 <h2>{{ listing.title }}</h2>
@@ -18,5 +19,8 @@
                 <a href="{% url 'listing' title=listing.title %}" class="btn btn-success"> Go to Listing </a> 
             </div>
         {% endfor %}
+    {% else %}
+        <h3>Empty</h3>
+    {% endif %}
     </div>
 {% endblock %}

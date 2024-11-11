@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
-from .models import User, Listings, Category, Owner
+from .models import User, Listings, Category, Comment
 
 
 def index(request):
@@ -39,6 +39,19 @@ def watchList(request):
     return render(request, "auctions/watchlist.html", { 
              "listing": listings
             })
+
+def message(request, title):
+    user=request.user
+    listingID=Listings.objects.get(title=title)
+    message= request.POST['message']
+
+    comment= Comment(
+        owner = user, 
+        listing = listingID, 
+        message= message
+    )
+    comment.save()
+    return HttpResponseRedirect(reverse("listing", args=(title, )))
 
 def CreateListings(request):
     if request.method== "GET":

@@ -35,6 +35,10 @@ class Listings(models.Model):
     def __str__(self):
         return f"{self.title}"
     
-         
+class Comment(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ownerComment", default=1)
+    listing = models.ForeignKey(Listings, on_delete=models.CASCADE, related_name="listingComment")
+    message= models.CharField(max_length= 200)
 
-    
+    def __str__(self):
+        return f"{self.owner} comment on {self.listing}"
