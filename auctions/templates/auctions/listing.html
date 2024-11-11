@@ -44,9 +44,7 @@
     {% endif %}
 {% endif %}
 </div>
-<div class = "row mx-3">
     <h2> Message Board </h2>
-    
     {% if user.is_authenticated %}
         <form action="{% url 'message' title=listing.title %}" method="POST"> 
             {% csrf_token %}
@@ -54,5 +52,4 @@
             <button type="submit" class="btn btn-warning">Submit</button>
         </form>
     {% endif %}
-</div>
 {% endblock %}
