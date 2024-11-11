@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.utils import timezone
 
 from .models import User, Listings, Category, Comment
 
@@ -16,9 +17,11 @@ def index(request):
 def listing(request, title): 
     listingID=Listings.objects.get(title=title)
     listingInWatchlist= request.user in listingID.watchList.all()
+    listingComments = Comment.objects.filter(listing=listingID)
     return render(request, "auctions/listing.html", {
         "listing":listingID, 
-        "listingInWatchList": listingInWatchlist
+        "listingInWatchList": listingInWatchlist,
+        "message": listingComments
         })
 
 def remove(request, title): 
@@ -43,12 +46,13 @@ def watchList(request):
 def message(request, title):
     user=request.user
     listingID=Listings.objects.get(title=title)
-    message= request.POST['message']
+    message= request.POST.get('message', '')
 
     comment= Comment(
         owner = user, 
         listing = listingID, 
-        message= message
+        message= message,
+        timestamp=timezone.now()
     )
     comment.save()
     return HttpResponseRedirect(reverse("listing", args=(title, )))

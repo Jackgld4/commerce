@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -39,6 +40,7 @@ class Comment(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ownerComment", default=1)
     listing = models.ForeignKey(Listings, on_delete=models.CASCADE, related_name="listingComment")
     message= models.CharField(max_length= 200)
+    timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.owner} comment on {self.listing}"

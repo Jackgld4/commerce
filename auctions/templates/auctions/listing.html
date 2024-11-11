@@ -48,8 +48,22 @@
     {% if user.is_authenticated %}
         <form action="{% url 'message' title=listing.title %}" method="POST"> 
             {% csrf_token %}
-            <input type="text" name="comment" placeholder="Leave a message">
+            <input type="text" name="message" placeholder="Leave a message">
             <button type="submit" class="btn btn-warning">Submit</button>
         </form>
     {% endif %}
+    <ul class="list-group">
+        {% for message in message %}
+            <li class="list-group-item">
+                {{message.message}}
+                <br>
+                <p> By: {{message.owner}}</p>
+                <div class="gh-article-meta">
+                    <time class="gh-article-date" datetime="{{ message.timestamp|date:"Y-m-d" }}">
+                        {{ message.timestamp|date:"F j, Y, g:i a" }}
+                    </time>
+                </div>
+            </li>
+        {%endfor %}
+    </ul>
 {% endblock %}
