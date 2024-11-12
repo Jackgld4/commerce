@@ -22,7 +22,7 @@
             {% for listing in listings %}
                 <div class="listing-box">
                     <h3>{{ listing.title }}</h3>
-                    <img src="{{ listing.imageUrl }}" alt="Image of {{ listing.title }}" style="max-width: 25%; max-height: 25%;">
+                    <img src="{{ listing.imageUrl }}">
                     <p>{{ listing.description }}</p>
                     <p>Price: ${{ listing.price }}</p>
                     <a href="{% url 'listing' title=listing.title %}" class="btn btn-success"> Go to Listing </a>
